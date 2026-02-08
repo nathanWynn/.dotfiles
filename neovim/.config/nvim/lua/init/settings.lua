@@ -127,3 +127,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
   end,
 })
+
+vim.keymap.set('n', '<leader>cc', function()
+  local file = vim.fn.expand('%:p')
+  local dir = vim.fn.expand('%:p:h')
+  vim.fn.system(string.format('tmux split-window -h -l 40%% -c "%s" "zsh -ic \'claude %s\'"', dir, file))
+end, { desc = 'Open Claude with current file' })
+
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
+  group = vim.api.nvim_create_augroup('auto_reload', {}),
+  desc = 'Reload files changed outside neovim',
+  callback = function()
+    if vim.fn.getcmdwintype() == '' then
+      vim.cmd('checktime')
+    end
+  end,
+})

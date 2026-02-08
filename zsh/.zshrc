@@ -123,3 +123,6 @@ alias mk9s="cd ~/workspace/mini && devbox run k9s"
 
 alias stack-polls='~/.config/tmux/sessions/toggle_brew_services.sh'
 alias stack-devenv='~/.config/tmux/sessions/toggle_devenv.sh'
+
+eval "$(mise activate zsh)"
+export PATH="$HOME/.local/bin:$PATH"

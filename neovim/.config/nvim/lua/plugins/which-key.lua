@@ -51,6 +51,12 @@ return {
         { '<leader>t', group = '[T]oggle' },
         { '<leader>u', group = '[U]I' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        -- Document standard LSP navigation (handled by Snacks)
+        { 'gd', desc = 'Goto Definition' },
+        { 'gD', desc = 'Goto Declaration' },
+        { 'gr', desc = 'Goto References' },
+        { 'gI', desc = 'Goto Implementation' },
+        { 'gy', desc = 'Goto Type Definition' },
       },
     },
   }

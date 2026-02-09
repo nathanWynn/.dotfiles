@@ -72,9 +72,10 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          -- Standardize on Snacks for all g* navigation keymaps (gd, gD, gr, gI, gy)
+          -- Use <leader>c* for code actions (fits with [C]ode which-key group)
+          map('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
+          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -175,7 +176,20 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        ruby_lsp = {},
+        ruby_lsp = {
+          -- init_options = {
+          --   enabledFeatures = {
+          --     "documentHighlights",
+          --     "documentSymbols",
+          --     "foldingRanges",
+          --     "selectionRanges",
+          --     "semanticHighlighting",
+          --     "formatting",
+          --     "codeActions",
+          --   },
+          -- },
+          -- settings = {},
+        },
 
         lua_ls = {
           -- cmd = { ... },
@@ -209,6 +223,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'rubocop', -- Used to format Ruby code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -261,6 +276,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        ruby = { 'rubocop' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

@@ -49,6 +49,7 @@ return {
         { '<leader>g', group = '[G]it' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
+        { '<leader>T', group = '[T]est' },
         { '<leader>u', group = '[U]I' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         -- Document standard LSP navigation (handled by Snacks)

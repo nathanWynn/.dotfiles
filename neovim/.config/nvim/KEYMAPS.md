@@ -64,6 +64,15 @@ Code modification commands use the `<leader>c` prefix:
 - `<leader>bd` - Delete Buffer
 - `<leader>,` - Buffer List
 
+## Tests
+- `<leader>Tn` - Test Nearest (run test under cursor)
+- `<leader>Tf` - Test File (run current spec file)
+- `<leader>Ts` - Test Suite (run all tests)
+- `<leader>Tl` - Test Last (re-run last test)
+- `<leader>Tv` - Test Visit (jump to last test file)
+- `<leader>a` - Alternate File (swap between file and spec)
+- `<leader>A` - Alternate File in vertical split
+
 ## Toggles
 - `<leader>th` - Toggle Inlay Hints
 - `<leader>tb` - Toggle Git Blame Line

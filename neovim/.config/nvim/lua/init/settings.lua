@@ -130,8 +130,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.keymap.set('n', '<leader>cc', function()
   local file = vim.fn.expand('%:p')
-  local dir = vim.fn.expand('%:p:h')
-  vim.fn.system(string.format('tmux split-window -h -l 40%% -c "%s" "zsh -ic \'claude %s\'"', dir, file))
+  -- Find project root (git root, or fallback to cwd)
+  local root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if vim.v.shell_error ~= 0 then
+    root = vim.fn.getcwd()
+  end
+  -- Open Claude Code in a right vertical split (40% width)
+  -- Store the pane ID in an environment variable so vimux can avoid it
+  vim.fn.system(string.format('tmux split-window -h -l 40%% -c "%s" -e PANE_TYPE=claude "zsh -ic \'claude %s\'"', root, file))
 end, { desc = 'Open Claude with current file' })
 
 vim.o.autoread = true

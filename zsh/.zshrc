@@ -126,3 +126,8 @@ alias stack-devenv='~/.config/tmux/sessions/toggle_devenv.sh'
 
 eval "$(mise activate zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+
+export EDITOR=nvim
+
+# Tmux layout helpers
+source "$HOME/.config/zsh/tmux-layouts.zsh"

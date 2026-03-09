@@ -176,20 +176,7 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        ruby_lsp = {
-          -- init_options = {
-          --   enabledFeatures = {
-          --     "documentHighlights",
-          --     "documentSymbols",
-          --     "foldingRanges",
-          --     "selectionRanges",
-          --     "semanticHighlighting",
-          --     "formatting",
-          --     "codeActions",
-          --   },
-          -- },
-          -- settings = {},
-        },
+        ruby_lsp = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -223,7 +210,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'rubocop', -- Used to format Ruby code
+        'rubocop',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -241,6 +228,7 @@ return {
           end,
         },
       }
+
     end,
   },
 
@@ -276,7 +264,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        ruby = { 'rubocop' },
+        -- ruby formatting handled by ruby-lsp's built-in rubocop add-on (lsp_format fallback)
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

@@ -102,9 +102,9 @@ return {
       vim.g.VimuxHeight = '20'
       vim.g.VimuxOrientation = 'v'
 
-      -- Don't use the nearest pane - create a dedicated test runner pane
-      -- This prevents vimux from targeting the Claude Code pane
-      vim.g.VimuxUseNearest = 0
+      -- Target the bottom 'runner' pane by title (set by tdl)
+      vim.g.VimuxUseNearest = 1
+      vim.g.VimuxRunnerName = 'runner'
 
       -- Use 'p' alias for running RSpec in container (prizepicks-rails)
       vim.g['test#ruby#rspec#executable'] = 'p bundle exec rspec'

@@ -1,3 +1,37 @@
+# Open a work session with prizepicks-rails and devenv windows
+# Usage: work
+work() {
+  local rails_dir="$HOME/Workspace/prizepicks-rails"
+  local devenv_dir="$HOME/Workspace/prizepicks-devenv"
+  local session="work"
+
+  if tmux has-session -t "$session" 2>/dev/null; then
+    if [[ -n $TMUX ]]; then
+      tmux switch-client -t "$session"
+    else
+      tmux attach-session -t "$session"
+    fi
+    return
+  fi
+
+  # Create session with rails window (detached)
+  tmux new-session -d -s "$session" -n "prizepicks-rails" -c "$rails_dir"
+
+  # Create devenv window
+  tmux new-window -t "$session" -n "devenv" -c "$devenv_dir"
+
+  # Focus rails window and run tdl
+  tmux select-window -t "${session}:prizepicks-rails"
+  tmux send-keys -t "${session}:prizepicks-rails" "tdl claude" C-m
+
+  # Attach
+  if [[ -n $TMUX ]]; then
+    tmux switch-client -t "$session"
+  else
+    tmux attach-session -t "$session"
+  fi
+}
+
 # Create a Tmux Dev Layout with editor, ai, and terminal
 # Usage: tdl <c|cx|codex|other_ai> [<second_ai>]
 tdl() {
@@ -16,7 +50,9 @@ tdl() {
   tmux rename-window -t "$editor_pane" "$(basename "$current_dir")"
 
   # Split window vertically - top 85%, bottom 15% (target editor pane explicitly)
-  tmux split-window -v -p 15 -t "$editor_pane" -c "$current_dir"
+  local runner_pane
+  runner_pane=$(tmux split-window -v -p 15 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
+  tmux select-pane -T 'runner' -t "$runner_pane"
 
   # Split editor pane horizontally - AI on right 30% (capture new pane ID directly)
   ai_pane=$(tmux split-window -h -p 30 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')

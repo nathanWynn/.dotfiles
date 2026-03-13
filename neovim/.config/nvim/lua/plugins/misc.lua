@@ -9,6 +9,16 @@ return {
     opts = {},
   },
   {
+    'karb94/neoscroll.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
+    'sphamba/smear-cursor.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
     'echasnovski/mini.nvim',
     config = function()
       require('mini.ai').setup { n_lines = 500 }
@@ -37,7 +47,7 @@ return {
       },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true },
+      scroll = { enabled = false },
       statuscolumn = { enabled = true },
       words = { enabled = true },
       styles = {

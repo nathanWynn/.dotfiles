@@ -30,6 +30,7 @@ return {
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
       },
       integrations = {
+        bufferline = true,
         gitsigns = true,
         copilot = true,
         mason = true,

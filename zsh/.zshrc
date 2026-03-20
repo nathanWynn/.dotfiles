@@ -131,3 +131,6 @@ export EDITOR=nvim
 
 # Tmux layout helpers
 source "$HOME/.config/zsh/tmux-layouts.zsh"
+
+# Remote env helpers
+[[ -f ~/Workspace/scripts/remote_work.zsh ]] && source ~/Workspace/scripts/remote_work.zsh

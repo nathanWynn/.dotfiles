@@ -1,11 +1,17 @@
 return {
   'nvim-lualine/lualine.nvim',
-  -- Adapted from:
-  -- https://github.com/catppuccin/tmux/discussions/317#discussioncomment-14030975
   opts = function(_, opts)
     local auto = require 'lualine.themes.auto'
 
-    local colors = require('catppuccin.palettes').get_palette 'frappe'
+    -- everforest dark medium palette
+    local colors = {
+      green   = '#a7c080',
+      teal    = '#83c092',
+      red     = '#e67e80',
+      yellow  = '#dbbc7f',
+      blue    = '#7fbbb3',
+      surface0 = '#475258',
+    }
 
     local function separator()
       return {

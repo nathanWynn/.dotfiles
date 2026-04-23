@@ -42,8 +42,8 @@ return {
       },
       picker = {
         enabled = true,
-        hidden = true,
-        ignored = true,
+        hidden = false,
+        ignored = false,
       },
       quickfile = { enabled = true },
       scope = { enabled = true },

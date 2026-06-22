@@ -106,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # My aliases
+alias fspec='(){ local files; files=$(rg -l "$1" spec/ | fzf --multi --preview "cat {}"); [[ -n "$files" ]] && p bundle exec rspec $(echo "$files" | tr "\n" " ") }'
 alias p="~/Workspace/prizepicks-devenv/scripts/run_in_container"
 alias tpscorekeeper="kubectl port-forward -n scorekeeper service/scorekeeper 1337:80"
 

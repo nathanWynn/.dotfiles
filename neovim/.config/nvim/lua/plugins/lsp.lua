@@ -178,6 +178,31 @@ return {
       local servers = {
         ruby_lsp = {},
 
+        gopls = {
+          settings = {
+            gopls = {
+              gofumpt = true,
+              staticcheck = true,
+              usePlaceholders = true,
+              completeUnimported = true,
+              analyses = {
+                unusedparams = true,
+                unusedwrite = true,
+                nilness = true,
+                useany = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            },
+          },
+        },
+
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -211,6 +236,8 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'rubocop',
+        'goimports', -- Organize imports + gofmt for Go
+        'gofumpt', -- Stricter Go formatting
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -264,6 +291,8 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        -- goimports organizes imports + runs gofmt; gofumpt applies stricter rules
+        go = { 'goimports', 'gofumpt' },
         -- ruby formatting handled by ruby-lsp's built-in rubocop add-on (lsp_format fallback)
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },

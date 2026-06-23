@@ -1,10 +1,12 @@
 return {
-  "sainnhe/everforest",
+  "catppuccin/nvim",
+  name = "catppuccin",
   priority = 1000,
   config = function()
-    vim.g.everforest_background = 'medium'
-    vim.g.everforest_enable_italic = 1
-    vim.g.everforest_transparent_background = 2
-    vim.cmd('colorscheme everforest')
+    require("catppuccin").setup({
+      flavour = "frappe",
+      transparent_background = true,
+    })
+    vim.cmd('colorscheme catppuccin')
   end
 }

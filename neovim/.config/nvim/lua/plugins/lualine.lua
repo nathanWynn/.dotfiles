@@ -3,14 +3,14 @@ return {
   opts = function(_, opts)
     local auto = require 'lualine.themes.auto'
 
-    -- everforest dark medium palette
+    -- catppuccin frappe palette
     local colors = {
-      green   = '#a7c080',
-      teal    = '#83c092',
-      red     = '#e67e80',
-      yellow  = '#dbbc7f',
-      blue    = '#7fbbb3',
-      surface0 = '#475258',
+      green   = '#a6d189',
+      teal    = '#81c8be',
+      red     = '#e78284',
+      yellow  = '#e5c890',
+      blue    = '#8caaee',
+      surface0 = '#626880',
     }
 
     local function separator()

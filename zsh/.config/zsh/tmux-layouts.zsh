@@ -1,37 +1,3 @@
-# Open a work session with prizepicks-rails and devenv windows
-# Usage: work
-work() {
-  local rails_dir="$HOME/Workspace/prizepicks-rails"
-  local devenv_dir="$HOME/Workspace/prizepicks-devenv"
-  local session="work"
-
-  if tmux has-session -t "$session" 2>/dev/null; then
-    if [[ -n $TMUX ]]; then
-      tmux switch-client -t "$session"
-    else
-      tmux attach-session -t "$session"
-    fi
-    return
-  fi
-
-  # Create session with rails window (detached)
-  tmux new-session -d -s "$session" -n "prizepicks-rails" -c "$rails_dir"
-
-  # Create devenv window
-  tmux new-window -t "$session" -n "devenv" -c "$devenv_dir"
-
-  # Focus rails window and run tdl
-  tmux select-window -t "${session}:prizepicks-rails"
-  tmux send-keys -t "${session}:prizepicks-rails" "tdl claude" C-m
-
-  # Attach
-  if [[ -n $TMUX ]]; then
-    tmux switch-client -t "$session"
-  else
-    tmux attach-session -t "$session"
-  fi
-}
-
 # Create a Tmux Dev Layout with editor, ai, and terminal
 # Usage: tdl <c|cx|codex|other_ai> [<second_ai>]
 tdl() {

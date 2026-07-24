@@ -1,13 +1,15 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    dependencies = { 'RRethy/nvim-treesitter-endwise' },
     config = function()
-      require("nvim-treesitter").setup({
+      require('nvim-treesitter.configs').setup {
         auto_install = true,
+        ensure_installed = { 'ruby', 'lua', 'go', 'vim', 'vimdoc', 'query', 'markdown', 'bash', 'json', 'yaml' },
         highlight = { enable = true },
         indent = { enable = false },
-      })
-    end
-  }
+      }
+    end,
+  },
 }

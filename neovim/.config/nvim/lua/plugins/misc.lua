@@ -42,7 +42,7 @@ return {
       },
       picker = {
         enabled = true,
-        hidden = false,
+        hidden = true,
         ignored = false,
       },
       quickfile = { enabled = true },
